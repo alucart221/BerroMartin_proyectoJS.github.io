@@ -18,7 +18,7 @@
         background-color: #b2b4b8;
     }
     header img{
-        width: 20%;
+        width: 25%;
     }
     footer {
         background-color: #b2b4b8;
@@ -32,7 +32,7 @@
 </style>
 <body>
 
-    <header class="d-flex justify-content-start py-3 gap-2"> 
+    <header class="d-flex justify-content-start gap-2"> 
         <a href="idex.html"><img src="logo.png" alt="logo de la pagina"></a>
     </header>
     <article class="d-flex flex-column gap-4 justify-content-center" id="fondo">
@@ -43,8 +43,8 @@
                 <input type="text" id = "asunto" placeholder="asunto" required>
                 <textarea type="text" class="form-control myInput" id = "mensaje" placeholder="mensaje" required rows="5"></textarea>
                 <div class="d-flex gap-4">
-                    <button class="btn btn-success px-3" type="button">enviar</button>
-                    <button class="btn btn-danger px-3" type="button">cancelar</button>
+                    <button class="btn btn-success px-3" type="button" onclick="shotgun()">enviar</button>
+                    <button class="btn btn-danger px-3" type="button" onclick="no()">cancelar</button>
                 </div>
             </form>
         </div>
@@ -59,8 +59,21 @@
 
 </body>
 <script>
+    function shotgun(){
+        const choclazo = {
+            nombre : document.getElementById("nombre").value,
+            email : document.getElementById("email").value,
+            asunto : document.getElementById("asunto").value,
+            mensaje : document.getElementById("mensaje").value,
+        }
+        
+        console.log(choclazo.nombre + " " + choclazo.email + " " + choclazo.asunto + " " + choclazo.mensaje + ".")
+    }
 
+    function no(){
+        alert("ponele");
+    }
 </script>
-
+    
 </html>
 
