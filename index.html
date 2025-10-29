@@ -43,6 +43,9 @@
                 <input type="text" id = "asunto" placeholder="asunto" required>
                 <textarea type="text" class="form-control myInput" id = "mensaje" placeholder="mensaje" required rows="5"></textarea>
                 <div id="html_element"></div>
+                <div class="mb-3">
+                    <div class="g-recaptcha" data-sitekey="6LdDavkrAAAAAGR4OQFmvhWGOwWkpoY0PQj7VWqc"></div>
+                </div>
                 <div class="d-flex gap-4">
                     <button class="btn btn-success px-3" type="button" onclick="shotgun()">enviar</button>
                     <button class="btn btn-danger px-3" type="button" onclick="no()">cancelar</button>
@@ -62,7 +65,7 @@
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"async defer></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <script>
     function shotgun(){
@@ -72,9 +75,11 @@
             asunto : document.getElementById("asunto").value,
             mensaje : document.getElementById("mensaje").value,
         }
-        if (document.getElementById("html_element").value == true) {
-           console.log(choclazo.nombre + " " + choclazo.email + " " + choclazo.asunto + " " + choclazo.mensaje + ".") 
+        if (!grecaptchaResponse) {
+        msg.innerHTML = '<div class="alert alert-warning">Por favor verifica que no eres un robot.</div>';
+        return;
         }
+    
         else{
             console.log(document.getElementById("html_element").value)
         }
