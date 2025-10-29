@@ -75,18 +75,24 @@
         const mensaje = document.getElementById("mensaje").value.trim();
         const recapcha_r = grecaptcha.getResponse();
 
-        console.log(nombre + " " + email + " " + asunto + " " + mensaje + ".")
-        alert(recapcha_r)
+        if(!recapcha_r){
+            msg.innerHTML = '<div class="alert alert-warning">Por favor verifica que no eres un robot.</div>';
+            return;
+        }
 
     });
 
 </script>
+
+<!-- ZONA DE TESTEOS
+    console.log(nombre + " " + email + " " + asunto + " " + mensaje + ".")
+    alert(recapcha_r)
 
 <script type="text/javascript">
     var onloadCallback = function() {
     grecaptcha.render('html_element', {'sitekey' : '6LdDavkrAAAAAGR4OQFmvhWGOwWkpoY0PQj7VWqc'});
     }; 
 </script>
-
+-->
 
 </html>
