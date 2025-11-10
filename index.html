@@ -38,10 +38,10 @@
     <article class="d-flex flex-column gap-4 justify-content-center" id="fondo">
         <div class="position-static d-flex flex-column flex-lg-row justify-content-center p-2 " >
             <form class="col-lg-3 flex-column d-flex flex-column gap-2  p-3 rounded-1"  id="formulario" data-bs-theme="dark"> 
-                <input type="text" id = "nombre" placeholder="nombre" required>
-                <input type="text" id = "email" placeholder="email">
-                <input type="text" id = "asunto" placeholder="asunto" required>
-                <textarea type="text" class="form-control myInput" id = "mensaje" placeholder="mensaje" required rows="5"></textarea>
+                <input type="text" id = "nombre" placeholder="nombre" name="nombre" required>
+                <input type="text" id = "email" placeholder="email" name="email">
+                <input type="text" id = "asunto" placeholder="asunto" name="asunto" required>
+                <textarea type="text" class="form-control myInput" id = "mensaje" placeholder="mensaje" name="mensaje" required rows="5"></textarea>
                 <div id="html_element"></div>
                 <div class="mb-3">
                     <div class="g-recaptcha" data-sitekey="6LdDavkrAAAAAGR4OQFmvhWGOwWkpoY0PQj7VWqc"></div>
@@ -53,8 +53,8 @@
     <footer class="py-2 fixed-bottom"> 
         <div class="d-flex align-items-start gap-4 justify-content-center">
             <a href="https://ar.linkedin.com/in/martin-ignacio-berro-5b8049337?trk=people-guest_people_search-card" target="_blank">martin</a>
-            <a href="https://es.wikipedia.org/wiki/Lionel_Messi" target="_blank">elias</a>
-            <a href="https://homestuck.com/" target="_blank">lautaro</a>
+            <a href="https://es.wikipedia.org/wiki/Lionel_Messi" target="_blank">wikkipedia messi</a>
+            <a href="https://homestuck.com/" target="_blank">homestuck</a>
         </div>
     </footer>
 
@@ -83,13 +83,14 @@
         const recapcha_r = grecaptcha.getResponse();
         const matizEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; //contiene un conjunto de instrucciones basicas para asegurarse de que el campo correo contenga @ y .
 
+        /*
         if(!matizEmail.test(email)){
             alert("Porfavor introduzca un correo valido.")
             
             return;
         }
         
-    if(!recapcha_r){
+        if(!recapcha_r){
             alert("Porfavor verifique que no es un bot.");
             
             return;
@@ -111,7 +112,8 @@
             alert("error al enviar respuesta");
         });
 
-
+        */
+        console.log(formulario);
         const datos_formulario = new FormData(formulario);
 
         fetch(scriptURL,{
