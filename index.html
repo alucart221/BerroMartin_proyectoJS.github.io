@@ -83,7 +83,7 @@
         const recapcha_r = grecaptcha.getResponse();
         const matizEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; //contiene un conjunto de instrucciones basicas para asegurarse de que el campo correo contenga @ y .
 
-        /*
+        
         if(!matizEmail.test(email)){
             alert("Porfavor introduzca un correo valido.")
             
@@ -112,11 +112,14 @@
             alert("error al enviar respuesta");
         });
 
-        */
+        
         console.log(formulario);
         const datos_formulario = new FormData(formulario);
 
         fetch(scriptURL,{
+             headers: {
+            "Content-Type": "application/json",
+            },
             method: "POST",
             body : datos_formulario,
             mode : "no-cors"
