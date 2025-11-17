@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.6.2/fetch.min.js"></script>
     <title>proto</title>
 </head>
 
@@ -24,7 +27,7 @@
         background-color: #b2b4b8;
     }
     footer a {
-      color: red; /* Example: blue text color */
+      color: red; /* Example: blue text color  */
       text-decoration: none; /* Removes the underline */
       font-weight: bold; /* Makes the text bold */
     }
@@ -33,7 +36,7 @@
 <body id="fondo">
 
     <header class="d-flex justify-content-start gap-2"> 
-        <a href="index.html"><img src="logo.png" alt="logo de la pagina"></a>
+        <a href="index.html">inicio</a>
     </header>
     <article class="d-flex flex-column gap-4 justify-content-center" id="fondo">
         <div class="position-static d-flex flex-column flex-lg-row justify-content-center p-2 " >
@@ -59,14 +62,11 @@
     </footer>
 
 </body>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 
 <script>
-
-    const formulario = document.getElementById("formulario");
-    const scriptURL = "https://script.google.com/macros/s/AKfycbx6lAyO1qPhIt-OE6qwKgwVb_dT_6dYVySdWjhmog2wMUsNc7ukf29l4iXD4C3vet1a/exec"; //URL de google sheets para macros
+    var formulario = document.getElementById("formulario");
+    var scriptURL = "https://script.google.com/macros/s/AKfycbx6lAyO1qPhIt-OE6qwKgwVb_dT_6dYVySdWjhmog2wMUsNc7ukf29l4iXD4C3vet1a/exec"; //URL de google sheets para macros
 
     formulario.addEventListener("submit", function(e) {
 
@@ -83,7 +83,7 @@
         const recapcha_r = grecaptcha.getResponse();
         const matizEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; //contiene un conjunto de instrucciones basicas para asegurarse de que el campo correo contenga @ y .
 
-        
+       
         if(!matizEmail.test(email)){
             alert("Porfavor introduzca un correo valido.")
             
@@ -113,22 +113,29 @@
         });
 
         
-        console.log(formulario);
-        const datos_formulario = new FormData(formulario);
+        var formData = new FormData(formulario);
 
-        fetch(scriptURL,{
-             headers: {
-            "Content-Type": "application/json",
-            },
+        console.log(formData.get("nombre"));
+        console.log(formData.get("email"));
+        console.log(formData.get("asunto"));
+        console.log(formData.get("mensaje"));
+
+        fetch(scriptURL, {
             method: "POST",
-            body : datos_formulario,
-            mode : "no-cors"
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: formData,
+            mode: "no-cors"
         });
+        
     });
 
 </script>
 
 <!-- ZONA DE TESTEOS
+ 
     console.log(nombre + " " + email + " " + asunto + " " + mensaje + ".");
 
     alert(recapcha_r);
@@ -136,6 +143,17 @@
     console.log(matizEmail.test(email));
 
     console.log(mensaje);
--->
+    
+    const formData = new FormData(formulario);
 
+        console.log(formData);
+
+        fetch(scriptURL,{
+            headers: {'Content-Type':'application/x-www-form-urlencoded'},
+            method: "POST",
+            body : formData,
+            mode : "no-cors"
+        });
+-->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </html>
